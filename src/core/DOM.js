@@ -6,6 +6,23 @@ const DATA_ACTION_FUNC = "Quizio.getAction('$').start(event)"
  * DOM helper
  */
 class DOM {
+    /**
+     * Returns splitted class name.
+     * 
+     * @param {string} className 
+     * @returns {string} Splitted class name
+     */
+     static extractClassList(className) {
+        return className.split(" ")
+    }
+    
+    /**
+     * Returns root child HTML element.
+     * 
+     * @param {RenderableComponent} component 
+     * @param {HTMLElement} el 
+     * @returns {HTMLElement}
+     */
     static getRootChild(component, el) {
         const componentTemplate = component.template().replace(/[\r\n]/gm, '').trim()
         
@@ -19,6 +36,12 @@ class DOM {
         return componentDomChilds[0]
     }
 
+    /**
+     * Returns HTML-string for component.
+     * 
+     * @param {RenderableComponent} component 
+     * @returns {string} HTML-string
+     */
     static getHtmlWithAttributes(component) {
         const el = document.createElement("div")
         const rootDomChild = DOM.getRootChild(component, el)
@@ -36,20 +59,34 @@ class DOM {
         return el.innerHTML
     }
 
+    /**
+     * Returns HTML element by ID.
+     * 
+     * @param {string} id 
+     * @returns {HTMLElement | null}
+     */
     static getElementById(id) {
         return document.getElementById(id)
     }
 
+    /**
+     * Returns HTML element by component ID.
+     * 
+     * @param {string} id 
+     * @returns {HTMLElement | null}
+     */
     static getElementByComponentId(id) {
         return document.querySelector(`[${DATA_COMPONENT_ID}="${id}"]`)
     }
 
+    /**
+     * Returns HTML element by action ID.
+     * 
+     * @param {string} id 
+     * @returns {HTMLElement | null}
+     */
     static getElementByActionId(id) {
         return document.querySelector(`[${DATA_ACTION_ID}="${id}"]`)
-    }
-
-    static extractClassList(className) {
-        return className.split(" ")
     }
 }
 

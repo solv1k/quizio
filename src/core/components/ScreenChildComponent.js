@@ -10,6 +10,9 @@ class ScreenChildComponent extends ManagableComponent {
         this.field = null
     }
 
+    /**
+     * Remove current component with managable field.
+     */
     remove() {
         this.field?.remove()
         super.remove()

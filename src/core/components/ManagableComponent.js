@@ -9,6 +9,11 @@ class ManagableComponent extends RenderableComponent {
         super()
     }
 
+    /**
+     * Returns array of managable fields for current component.
+     * 
+     * @returns {array<ManageField>}
+     */
     managableFields() {
         return [
             new ManageField({ label: `#`})

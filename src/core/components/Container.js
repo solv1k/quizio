@@ -8,10 +8,13 @@ class Container extends RenderableComponent {
     constructor({ storeId }) {
         super()
         this.storeId = storeId
-        this.putInStore()
+        this.saveInGlobalStore()
     }
 
-    putInStore() {
+    /**
+     * Save container in global store.
+     */
+    saveInGlobalStore() {
         if (!this.storeId) {
             throw new Error("Can't save component in store without ID.")
         }

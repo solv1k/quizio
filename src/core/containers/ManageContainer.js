@@ -11,11 +11,21 @@ class ManageContainer extends Container {
         this.builder = new FieldBuilder(this);
     }
 
+    /**
+     * Set managable component.
+     * 
+     * @param {ManagableComponent} managableComponent 
+     */
     setManagableComponent(managableComponent) {
         this.managableComponent = managableComponent
         this.refresh()
     }
 
+    /**
+     * Returns HTML-string for current managable component.
+     * 
+     * @returns {string} HTML-string
+     */
     renderManagableComponent() {
         if (!this.managableComponent) return ""
         return this.builder.render()

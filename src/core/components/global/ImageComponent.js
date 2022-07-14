@@ -1,5 +1,8 @@
 import RenderableComponent from "../RenderableComponent.js";
 
+/**
+ * Simple image.
+ */
 class ImageComponent extends RenderableComponent {
     constructor() {
         super()

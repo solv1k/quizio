@@ -1,7 +1,10 @@
 import RenderableComponent from "../RenderableComponent.js";
 
+/**
+ * Simple button.
+ */
 class ButtonComponent extends RenderableComponent {
-    constructor({ text="", action = null }) {
+    constructor({ text = "", action = null }) {
         super()
         this.text = text
         this.action = action

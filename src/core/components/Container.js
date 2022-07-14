@@ -1,6 +1,9 @@
 import Store from "../Store.js";
 import RenderableComponent from "./RenderableComponent.js";
 
+/**
+ * This component use for containering other components.
+ */
 class Container extends RenderableComponent {
     constructor({ storeId }) {
         super()

@@ -2,7 +2,7 @@ import Container from "../components/Container.js";
 
 class DebugContainer extends Container {
     constructor() {
-        super({ storeId: "debugContainer" })
+        super({ storeId: "debug" })
         this.lines = []
     }
 

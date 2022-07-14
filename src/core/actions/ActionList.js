@@ -1,6 +1,9 @@
 import Action from "./Action.js";
 
-class MultiAction extends Action {
+/**
+ * List for starting multiple actions.
+ */
+class ActionList extends Action {
     constructor() {
         super()
         this.actions = []
@@ -22,4 +25,4 @@ class MultiAction extends Action {
     }
 }
 
-export default MultiAction
+export default ActionList

@@ -1,14 +1,14 @@
 import Helpers from "../../helpers/Helpers.js";
 import Action from "../actions/Action.js";
-import MultiAction from "../actions/MultiAction.js";
+import ActionList from "../actions/ActionList.js";
 import ButtonComponent from "../components/global/ButtonComponent.js";
 import Container from "../components/Container.js";
 
 class WorkContainer extends Container {
     constructor() {
         super({ storeId: "work" })
-        this.setBeforeRefresh(new MultiAction())
-        this.setAfterRefresh(new MultiAction())
+        this.setBeforeRefresh(new ActionList())
+        this.setAfterRefresh(new ActionList())
         this.init()
     }
 

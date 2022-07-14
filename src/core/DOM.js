@@ -1,6 +1,6 @@
 const DATA_COMPONENT_ID = "data-quizio-id"
 const DATA_ACTION_ID = "data-quizio-action-id"
-const DATA_ACTION_FUNC = "Quizio.action('$').start(event)"
+const DATA_ACTION_FUNC = "Quizio.getAction('$').start(event)"
 
 /**
  * DOM helper

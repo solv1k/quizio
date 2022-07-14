@@ -2,7 +2,7 @@ import Store from '../Store.js';
 import UUID from '../../helpers/UUID.js';
 
 /**
- * Parent component class
+ * Basic component class.
  */
 class Component {
     constructor() {

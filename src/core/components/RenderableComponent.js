@@ -2,7 +2,7 @@ import { DOM } from "../DOM.js"
 import Component from "./Component.js"
 
 /**
- * Component has render method
+ * This component can be render in DOM.
  */
 class RenderableComponent extends Component {
     constructor() {

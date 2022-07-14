@@ -11,23 +11,37 @@ import Store from './Store.js';
  */
 class Quizio {
     constructor({ containerId = "app", config = {} }) {
+        // throw error if app already run
+        if (typeof window.Quizio !== "undefined") {
+            throw new Error("You can launch just one copy of Quizio constructor.")
+        }
+        // save app instance in global variable
         window.Quizio = this
+        // initialize object fields
         this.containerId = containerId;
         this.config = config;
+        // initialize app
         this.init()
     }
 
-    action(key) {
-        return Store.actions.get(key)
+    /**
+     * Returns action from global storage by key.
+     * 
+     * @param {string} key 
+     * @returns object | null
+     */
+    getAction(key) {
+        return Store.getAction(key)
     }
 
-    component(key) {
-        return Store.components.get(key)
-    }
-
+    /**
+     * Initialize application.
+     */
     init() {
-        const eventListener = new EventListener()
+        // start global event listener
+        EventListener.start()
 
+        // create application container with children containers and render its
         const appContainer = new AppContainer(this.containerId)
         .addChilds([
             new NavContainer(),

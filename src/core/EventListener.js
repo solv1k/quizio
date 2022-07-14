@@ -5,11 +5,7 @@ import Store from "./Store.js"
  * Listener for global events
  */
 class EventListener {
-    constructor() {
-        this.init()
-    }
-
-    getTargetComponent(target) {
+    static getTargetComponent(target) {
         const componentId = target.getAttribute(DATA_COMPONENT_ID)
         if (componentId && Store.components.has(componentId)) {
             return Store.components.get(componentId)
@@ -17,7 +13,7 @@ class EventListener {
         return null
     }
 
-    getTargetAction(target) {
+    static getTargetAction(target) {
         const actionId = target.getAttribute(DATA_ACTION_ID)
         if (actionId && Store.actions.has(actionId)) {
             return Store.actions.get(actionId)
@@ -25,10 +21,10 @@ class EventListener {
         return null
     }
 
-    init() {
+    static start() {
         window.addEventListener("click", (e) => {
-            const component = this.getTargetComponent(e.target)
-            const action = this.getTargetAction(e.target)
+            const component = EventListener.getTargetComponent(e.target)
+            const action = EventListener.getTargetAction(e.target)
             
             if (component && component.hasActions()) {
                 component.startActions()

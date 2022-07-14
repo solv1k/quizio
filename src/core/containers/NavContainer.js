@@ -7,7 +7,7 @@ import AddNewScreenAction from '../actions/builder/AddNewScreenAction.js';
  */
 class NavContainer extends Container {
     constructor() {
-        super({ storeId: "navContainer" })
+        super({ storeId: "nav" })
         this.items = [
             new NavItem({
                 title: "Add new Screen",

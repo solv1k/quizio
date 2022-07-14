@@ -1,7 +1,7 @@
 import RenderableComponent from '../RenderableComponent.js';
 
 /**
- * Navigation Item component
+ * Navigation item.
  */
 class NavItem extends RenderableComponent {
     constructor({ title, action }) {

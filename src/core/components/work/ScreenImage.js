@@ -18,7 +18,7 @@ class ScreenImage extends ScreenChildComponent {
         ])
 
         this.field = new UploadField({
-            label: "Выберите изображение...",
+            label: "Select image...",
             target: {
                 component: image,
                 attribute: "style",

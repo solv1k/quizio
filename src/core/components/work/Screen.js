@@ -1,5 +1,7 @@
+import Store from "../../Store.js";
 import RenderableComponent from "../RenderableComponent.js";
 import ScreenImage from "./ScreenImage.js";
+import ScreenRemover from "./ScreenRemover.js";
 import VariantButtonGroup from "./VariantButtonGroup.js";
 
 /**
@@ -17,6 +19,7 @@ class Screen extends RenderableComponent {
      */
     init() {
         this.addChilds([
+            new ScreenRemover(this),
             new ScreenImage(this),
             new VariantButtonGroup(this)
         ])
@@ -29,6 +32,12 @@ class Screen extends RenderableComponent {
      */
     managableFields() {
         return this.childs.map((child) => child.field)
+    }
+
+    remove() {
+        Store.getContainer("work")?.removeChild(this)
+        Store.getContainer("manager")?.setManagableComponent(null)
+        super.remove()
     }
 
     /**

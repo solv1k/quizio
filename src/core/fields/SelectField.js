@@ -34,6 +34,7 @@ class SelectField extends ManageField {
     }
 
     clearOptions() {
+        this._options.forEach((option) => option.remove())
         this._options = []
     }
 

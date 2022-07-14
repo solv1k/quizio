@@ -37,6 +37,26 @@ const Store = {
      */
     getAction: (key) => {
         return Store.actions.get(key) || null
+    },
+
+    /**
+     * Return global action by key.
+     * 
+     * @param {string} key 
+     * @returns {Action | null} Action | null
+     */
+    getGlobalAction: (key) => {
+        return Store.getAction(`global_${key}`)
+    },
+
+    /**
+     * Save global sction.
+     * 
+     * @param {string} key 
+     * @param {Action} action 
+     */
+    setGlobalAction: (key, action) => {
+        Store.actions.set(`global_${key}`, action)
     }
 }
 

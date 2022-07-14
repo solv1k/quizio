@@ -11,7 +11,7 @@ class AddNewScreenAction extends Action {
     }
     
     start() {
-        Store.containers.get("work")?.append(new Screen())
+        Store.containers.get("work")?.addChild(new Screen())
     }
 }
 

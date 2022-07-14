@@ -13,21 +13,32 @@ class VariantButton extends ScreenChildComponent {
         this.withDeleteButton = withDeleteButton
         this.deleteAction = deleteAction
         this.screen = screen
-        this.variantText = "Вариант"
+        this.variantText = "Variant"
         this.init()
     }
 
-    getOptionsData() {
-        const screensOptionsData = Store.getContainer("work")?.childs
+    getScreenOptionsData() {
+        // get all active screens from work container
+        // exclude current screen
+        // and map all data to array
+        // for dropdown select
+        const screenOptionsData = Store.getContainer("work")?.childs
         .filter((screen) => this.screen.id !== screen.id)
-        .map((screen, index) => {
+        .map((screen) => {
             return {
-                label: `Экран ${index + 1}`,
+                label: screen.id,
                 value: screen.id
             }
         })
 
-        return screensOptionsData
+        // add "New screen" button
+        // as last option in dropdown select
+        screenOptionsData.push({
+            label: "Add new screen",
+            onSelect: Store.getGlobalAction("AddNewScreen")
+        })
+
+        return screenOptionsData
     }
 
     init() {
@@ -35,18 +46,18 @@ class VariantButton extends ScreenChildComponent {
         this.addAction(setManageAction)
 
         const selectScreenField = new SelectField({
-            label: "Выберите экран...",
-            optionsData: this.getOptionsData()
+            label: "Select screen...",
+            optionsData: this.getScreenOptionsData()
         })
 
         Store.getContainer("work").afterRefresh.addAction(() => {
-            selectScreenField.refreshOptions(this.getOptionsData())
+            selectScreenField.refreshOptions(this.getScreenOptionsData())
             setManageAction.start()
         })
 
         const groupFields = [
             new TextField({ 
-                label: "Текст кнопки", 
+                label: "Button text", 
                 value: this.variantText,
                 autosaveOnChange: true,
                 target: {

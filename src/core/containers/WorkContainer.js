@@ -19,13 +19,18 @@ class WorkContainer extends Container {
         }
 
         this.saveButton = new ButtonComponent({
-            text: "Сохранить QUIZ",
+            text: "Save QUIZ",
             action: saveQuizAction
         })
     }
 
-    append(component) {
-        this.addChild(component)
+    addChild(component) {
+        super.addChild(component)
+        this.refresh()
+    }
+
+    removeChild(component) {
+        super.removeChild(component)
         this.refresh()
     }
 

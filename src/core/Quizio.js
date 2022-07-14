@@ -5,6 +5,7 @@ import NavContainer from './containers/NavContainer.js';
 import WorkContainer from './containers/WorkContainer.js';
 import EventListener from './EventListener.js';
 import Store from './Store.js';
+import AddNewScreenAction from './actions/builder/AddNewScreenAction.js';
 
 /**
  * Quizio main class
@@ -35,12 +36,30 @@ class Quizio {
     }
 
     /**
+     * Save action in global storage.
+     * 
+     * @param {string} key 
+     * @param {Action} action 
+     */
+    setGlobalAction(key, action) {
+        Store.setGlobalAction(key, action)
+    }
+
+    /**
+     * Setting global actions.
+     */
+    setGlobalActions() {
+        Store.setGlobalAction("AddNewScreen", new AddNewScreenAction())
+    }
+
+    /**
      * Initialize application.
      */
     init() {
+        // set global actions
+        this.setGlobalActions()
         // start global event listener
         EventListener.start()
-
         // create application container with children containers and render its
         const appContainer = new AppContainer(this.containerId)
         .addChilds([

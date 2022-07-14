@@ -14,7 +14,7 @@ class VariantButtonGroup extends ScreenChildComponent {
         this.field = new GroupField({
             fields: [
                 new ButtonField({
-                    label: "+ Добавить вариант",
+                    label: "+ Add variant button",
                     action: new AddNewVariantButtonAction(this)
                 })
             ]

@@ -34,6 +34,9 @@ class Screen extends RenderableComponent {
         return this.childs.map((child) => child.field)
     }
 
+    /**
+     * Full remove screen with refreshing after remove.
+     */
     remove() {
         Store.getContainer("work")?.removeChild(this)
         Store.getContainer("manager")?.setManagableComponent(null)

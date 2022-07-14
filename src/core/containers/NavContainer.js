@@ -8,22 +8,22 @@ import AddNewScreenAction from '../actions/builder/AddNewScreenAction.js';
 class NavContainer extends Container {
     constructor() {
         super({ storeId: "nav" })
-        this.items = [
+        this.init()
+    }
+
+    init() {
+        this.addChild(
             new NavItem({
                 title: "Add new Screen",
                 action: new AddNewScreenAction()
             })
-        ]
-    }
-
-    renderItems() {
-        return this.items.map((item) => item.render()).join("")
+        )
     }
 
     template() {
         return `
             <div class="quizio-nav">
-                ${this.renderItems()}
+                ${this.renderChilds()}
             </div>
         `
     }

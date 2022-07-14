@@ -27,6 +27,11 @@ class ScreenImage extends ScreenChildComponent {
         })
     }
 
+    /**
+     * HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
     template() {
         return `
             <div class="quizio-image-container">

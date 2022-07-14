@@ -6,7 +6,7 @@ class DebugContainer extends Container {
         this.lines = []
     }
 
-    printLn(text) {
+    printLine(text) {
         this.lines.push(text)
         this.refresh()
     }

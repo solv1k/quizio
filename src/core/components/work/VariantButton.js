@@ -89,6 +89,11 @@ class VariantButton extends ScreenChildComponent {
         })
     }
 
+    /**
+     * HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
     template() {
         return `
             <input type="button" class="quizio-variant-button" value="${this.variantText}" />

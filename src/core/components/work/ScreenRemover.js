@@ -23,6 +23,11 @@ class ScreenRemover extends ScreenChildComponent {
         })
     }
 
+    /**
+     * HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
     template() {
         return `
             <div class="quizio-screen-remover"></div>

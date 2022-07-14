@@ -26,7 +26,13 @@ class SelectField extends ManageField {
     }
 
     addOption(optionData) {
-        this._options.push(new OptionField(optionData))
+        const option = new OptionField(optionData)
+
+        if (this._selectedOptionValue === optionData.value) {
+            option.setSelected(true)
+        }
+
+        this._options.push(option)
     }
 
     addOptions(optionsData = []) {

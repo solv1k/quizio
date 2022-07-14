@@ -9,6 +9,9 @@ class ScreenImage extends ScreenChildComponent {
         this.init()
     }
 
+    /**
+     * Initialize Screen Image.
+     */
     init() {
         const image = new ImageComponent()
         image.addAction(new SetManageAction(this.screen))

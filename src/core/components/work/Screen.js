@@ -15,7 +15,7 @@ class Screen extends RenderableComponent {
     }
 
     /**
-     * Initialize screen.
+     * Initialize Screen.
      */
     init() {
         this.addChilds([

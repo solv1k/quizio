@@ -225,7 +225,7 @@ class RenderableComponent extends Component {
     }
 
     /**
-     * Returns HTML-string for current component.
+     * Returns HTML-string for current component taking from template() method.
      * 
      * @returns {string} HTML-string
      */

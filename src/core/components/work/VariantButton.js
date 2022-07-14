@@ -41,6 +41,9 @@ class VariantButton extends ScreenChildComponent {
         return screenOptionsData
     }
 
+    /**
+     * Initialize Variant Button.
+     */
     init() {
         const setManageAction = new SetManageAction(this.screen)
         this.addAction(setManageAction)

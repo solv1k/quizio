@@ -1,6 +1,9 @@
 import Container from "../components/Container.js";
 import FieldBuilder from "../FieldBuilder.js";
 
+/**
+ * Manage container (for managing Quizio screens).
+ */
 class ManageContainer extends Container {
     constructor() {
         super({ storeId: "manager" })
@@ -18,6 +21,11 @@ class ManageContainer extends Container {
         return this.builder.render()
     }
 
+    /**
+     * HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
     template() {
         return `
             <div class="quizio-manage-container">

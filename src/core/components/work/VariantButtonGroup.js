@@ -10,6 +10,9 @@ class VariantButtonGroup extends ScreenChildComponent {
         this.init()
     }
 
+    /**
+     * Initialize Variant Button Group.
+     */
     init() {
         this.field = new GroupField({
             fields: [

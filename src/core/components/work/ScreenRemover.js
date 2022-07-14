@@ -9,6 +9,9 @@ class ScreenRemover extends ScreenChildComponent {
         this.init()
     }
 
+    /**
+     * Initialize Screen Remover.
+     */
     init() {
         const removeScreenAction = new Action()
         removeScreenAction.start = () => {

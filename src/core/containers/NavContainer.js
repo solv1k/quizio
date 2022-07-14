@@ -3,7 +3,7 @@ import NavItem from '../components/nav/NavItem.js';
 import AddNewScreenAction from '../actions/builder/AddNewScreenAction.js';
 
 /**
- * Naviation component
+ * Naviation container (at the top of the app screen).
  */
 class NavContainer extends Container {
     constructor() {
@@ -11,6 +11,9 @@ class NavContainer extends Container {
         this.init()
     }
 
+    /**
+     * Initialize Navigation Container.
+     */
     init() {
         this.addChild(
             new NavItem({
@@ -20,6 +23,11 @@ class NavContainer extends Container {
         )
     }
 
+    /**
+     * HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
     template() {
         return `
             <div class="quizio-nav">

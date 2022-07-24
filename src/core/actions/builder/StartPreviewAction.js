@@ -10,6 +10,12 @@ class StartPreviewAction extends Action {
     start() {
         // "preview quiz" action
         const quizComponents = Store.getContainer("work").childs
+
+        if (quizComponents.length === 0) {
+            alert("Work container is empty. Add a new Screen first.")
+            return
+        }
+
         const previewer = new Previewer(quizComponents)
         previewer.show()
     }

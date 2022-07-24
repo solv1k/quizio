@@ -76,7 +76,6 @@ class RenderableComponent extends Component {
      */
     removeChild(child) {
         this.childs = this.childs.filter((c) => c.id !== child.id)
-        child.remove()
         return this
     }
 

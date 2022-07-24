@@ -29,8 +29,8 @@ class Previewer {
     renderQuizToPreviewContainer() {
         // get container for rendering quizio preview
         const previewContainer = this.getPreviewContainer()
-        // clear old quiz components
-        previewContainer.removeAllChilds()
+        // clear old quiz components (not remove!)
+        previewContainer.clearChilds()
         // parse quiz data
         this.quizComponents.forEach((component) => {
             previewContainer.addChild(component)

@@ -18,6 +18,10 @@ class PreviewContainer extends Container {
         this._constrols.push(closeBtn)
     }
 
+    clearChilds() {
+        this.childs = []
+    }
+
     show() {
         this._visible = true
         this.refresh()

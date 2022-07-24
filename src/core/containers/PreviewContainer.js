@@ -38,15 +38,14 @@ class PreviewContainer extends Container {
     innerTemplate() {
         return `
             <div class="quizio-preview-controls">${this.renderControls()}</div>
-            ${this.renderChilds()}
+            <div class="quizio-preview-screens">${this.renderChilds()}</div>
         `
     }
 
     template() {
         return `
             <div class="quizio-preview${this._visible ? " show" : ""}">
-                <div class="quizio-preview-controls">${this.renderControls()}</div>
-                ${this.renderChilds()}
+                ${this.innerTemplate()}
             </div>
         `
     }

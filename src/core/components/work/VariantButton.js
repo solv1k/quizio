@@ -89,7 +89,7 @@ class VariantButton extends ScreenChildComponent {
 
         this.field = new GroupField({
             fields: groupFields,
-            className: "d-flex"
+            className: "quizio-group-field"
         })
     }
 

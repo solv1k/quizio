@@ -1,6 +1,7 @@
 import Container from "../components/Container.js";
 import NavItem from '../components/nav/NavItem.js';
 import AddNewScreenAction from '../actions/builder/AddNewScreenAction.js';
+import StartPreviewAction from "../actions/builder/StartPreviewAction.js";
 
 /**
  * Naviation container (at the top of the app screen).
@@ -15,12 +16,17 @@ class NavContainer extends Container {
      * Initialize Navigation Container.
      */
     init() {
-        this.addChild(
+        this.addChilds([
             new NavItem({
                 title: "Add new Screen",
                 action: new AddNewScreenAction()
+            }),
+
+            new NavItem({
+                title: 'Preview QUIZ',
+                action: new StartPreviewAction()
             })
-        )
+        ])
     }
 
     /**

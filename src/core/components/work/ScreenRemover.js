@@ -16,13 +16,12 @@ class ScreenRemover extends ScreenChildComponent {
         const removeScreenAction = new Action()
         removeScreenAction.start = () => {
             this.screen.remove()
+            removeScreenAction.remove()
         }
-
-        this.removeScreenAction = removeScreenAction
 
         this.field = new ButtonField({
             label: "Remove this screen",
-            action: this.removeScreenAction
+            action: removeScreenAction
         })
     }
 

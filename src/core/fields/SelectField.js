@@ -3,16 +3,16 @@ import ManageField from "./ManageField.js";
 import OptionField from "./OptionField.js";
 
 class SelectField extends ManageField {
-    constructor({ label = "", optionsData = [] }) {
+    constructor({ label = "", options = [] }) {
         super({ label })
-        this.optionsData = [{ label }, ...optionsData]
+        this.options = [{ label }, ...options]
         this._options = []
         this._selectedOptionValue = ""
         this.init()
     }
 
     init() {
-        this.addOptions(this.optionsData)
+        this.addOptions(this.options)
 
         const onChangeOption = new Action()
         onChangeOption.start = (e) => {
@@ -25,18 +25,18 @@ class SelectField extends ManageField {
         this.setEvent("onchange", onChangeOption)
     }
 
-    addOption(optionData) {
-        const option = new OptionField(optionData)
+    addOption(option) {
+        const optionField = new OptionField(option)
 
-        if (this._selectedOptionValue === optionData.value) {
-            option.setSelected(true)
+        if (this._selectedOptionValue === option.value) {
+            optionField.setSelected(true)
         }
 
-        this._options.push(option)
+        this._options.push(optionField)
     }
 
-    addOptions(optionsData = []) {
-        optionsData.forEach((optionData) => this.addOption(optionData))
+    addOptions(options = []) {
+        options.forEach((option) => this.addOption(option))
     }
 
     clearOptions() {
@@ -44,11 +44,11 @@ class SelectField extends ManageField {
         this._options = []
     }
 
-    refreshOptions(optionsData = []) {
+    refreshOptions(options = []) {
         this.clearOptions()
         this.addOptions([{ 
             label: this.label 
-        }, ...optionsData])
+        }, ...options])
     }
 
     renderOptions() {

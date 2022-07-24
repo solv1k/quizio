@@ -4,7 +4,6 @@ import { DOM } from "./DOM.js"
 class FieldBuilder extends RenderableComponent {
     constructor(manageContainer) {
         super()
-        this.instanceof = "FieldBuilder"
         this.manageContainer = manageContainer
     }
 

@@ -17,7 +17,7 @@ class VariantButton extends ScreenChildComponent {
         this.init()
     }
 
-    getScreenOptionsData() {
+    getScreenOptions() {
         // get all active screens from work container
         // exclude current screen
         // and map all data to array
@@ -50,11 +50,11 @@ class VariantButton extends ScreenChildComponent {
 
         const selectScreenField = new SelectField({
             label: "Select screen...",
-            optionsData: this.getScreenOptionsData()
+            options: this.getScreenOptions()
         })
 
         Store.getContainer("work").afterRefresh.addAction(() => {
-            selectScreenField.refreshOptions(this.getScreenOptionsData())
+            selectScreenField.refreshOptions(this.getScreenOptions())
             setManageAction.start()
         })
 
@@ -75,6 +75,7 @@ class VariantButton extends ScreenChildComponent {
             const deleteAction = new Action()
             deleteAction.start = () => {
                 this.deleteAction.start(this)
+                this.screen.refresh()
                 deleteAction.remove()
             }
 

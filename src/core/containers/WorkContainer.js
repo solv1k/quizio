@@ -3,6 +3,7 @@ import Action from "../actions/Action.js";
 import ActionList from "../actions/ActionList.js";
 import ButtonComponent from "../components/global/ButtonComponent.js";
 import Container from "../components/Container.js";
+import Previewer from '../Previewer.js';
 
 /**
  * Work container (contains all screens created in Quizio app).
@@ -19,14 +20,28 @@ class WorkContainer extends Container {
      * Initialize Work Container.
      */
     init() {
+        // "save quiz" action
         const saveQuizAction = new Action()
         saveQuizAction.start = () => {
-            console.log(JSON.stringify(this, Helpers.circularReplacer()))
+            const quizData = JSON.stringify(this.childs, Helpers.circularReplacer())
+            console.log(quizData)
         }
-
-        this.saveButton = new ButtonComponent({
+        // "save quiz" button
+        this._saveButton = new ButtonComponent({
             text: "Save QUIZ",
             action: saveQuizAction
+        })
+        // "preview quiz" action
+        const previewQuizAction = new Action()
+        previewQuizAction.start = () => {
+            const quizComponents = this.childs
+            const previewer = new Previewer(quizComponents)
+            previewer.show()
+        }
+        // "preview quiz" button
+        this._previewButton = new ButtonComponent({
+            text: "Preview QUIZ",
+            action: previewQuizAction
         })
     }
 
@@ -60,7 +75,8 @@ class WorkContainer extends Container {
             <div class="quizio-work-container">
                 <div class="inner">
                     ${this.renderChilds()}
-                    ${this.hasChilds() ? this.saveButton.render() : ""}
+                    ${this.hasChilds() ? this._saveButton.render() : ""}
+                    ${this.hasChilds() ? this._previewButton.render() : ""}
                 </div>
             </div>
         `

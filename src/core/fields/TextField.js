@@ -21,19 +21,18 @@ class TextField extends ManageField {
 
             this.value = this.getInputValue()
 
-            this.target
-            .component
+            this.target.component
             .setAttribute(this.target.attribute, this.value)
             .refresh()
         }
 
-        this.addAction(saveAction);
+        this.setEvent("onlick", saveAction);
 
         if (this.autosaveOnChange) {
             this.setEvent("onkeyup", saveAction)
         } else {
             this.addChild(new ButtonField({
-                label: "Сохранить",
+                label: "Save",
                 action: saveAction
             }))
         }

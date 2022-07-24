@@ -6,6 +6,7 @@ import WorkContainer from './containers/WorkContainer.js';
 import EventListener from './EventListener.js';
 import Store from './Store.js';
 import AddNewScreenAction from './actions/builder/AddNewScreenAction.js';
+import PreviewContainer from './containers/PreviewContainer.js';
 
 /**
  * Quizio main class
@@ -66,7 +67,8 @@ class Quizio {
             new NavContainer(),
             new ManageContainer(),
             new WorkContainer(),
-            new DebugContainer()
+            new DebugContainer(),
+            new PreviewContainer()
         ])
         .render()
     }

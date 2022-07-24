@@ -1,3 +1,4 @@
+import Action from "../actions/Action.js"
 import { DOM } from "../DOM.js"
 import Component from "./Component.js"
 
@@ -75,6 +76,7 @@ class RenderableComponent extends Component {
      */
     removeChild(child) {
         this.childs = this.childs.filter((c) => c.id !== child.id)
+        child.remove()
         return this
     }
 
@@ -86,7 +88,6 @@ class RenderableComponent extends Component {
      */
     refreshChild(child) {
         this.childs = this.childs.filter((c) => c.id !== child.getOldId())
-        this.addChild(child)
         return this
     }
 
@@ -200,6 +201,20 @@ class RenderableComponent extends Component {
     }
 
     /**
+     * Create new event for current component
+     */
+     createEvent(type, actionFunction) {
+        if (typeof type === "undefined") return
+        if (typeof actionFunction !== "function") return
+
+        const action = new Action()
+
+        action.start = actionFunction
+
+        this.setEvent(type, action)
+    }
+
+    /**
      * Returns HTML-element for current version of component.
      * 
      * @returns {HTMLElement | null}
@@ -264,6 +279,17 @@ class RenderableComponent extends Component {
      */
     removeAllChilds() {
         this.childs.forEach((child) => child.remove())
+        this.childs = []
+    }
+
+    /**
+     * Remove all component events.
+     */
+    removeAllEvents() {
+        for (let [key, action] of Object.entries(this.events)) {
+            action.remove()
+        }
+        this.events = {}
     }
 
     /**
@@ -271,6 +297,7 @@ class RenderableComponent extends Component {
      */
     removeAllActions() {
         this.actions.forEach((action) => action.remove())
+        this.actions = []
     }
 
     /**
@@ -285,6 +312,7 @@ class RenderableComponent extends Component {
      */
     remove() {
         this.removeAllChilds()
+        this.removeAllEvents()
         this.removeAllActions()
         this.removeDomElement()
         super.remove()

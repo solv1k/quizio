@@ -1,6 +1,5 @@
 import Container from "../components/Container.js";
 import ButtonComponent from "../components/global/ButtonComponent.js";
-import { DOM } from "../DOM.js";
 
 class PreviewContainer extends Container {
     constructor() {
@@ -24,15 +23,23 @@ class PreviewContainer extends Container {
     }
 
     show() {
-        DOM.getElementByComponentId(this.id).classList.add('show')
+        this.getDomElement().innerHTML = this.innerTemplate()
+        this.getDomElement().classList.add('show')
     }
 
     hide() {
-        DOM.getElementByComponentId(this.id).classList.remove('show')
+        this.getDomElement().classList.remove('show')
     }
 
     renderControls() {
         return this._constrols.map((control) => control.render());
+    }
+
+    innerTemplate() {
+        return `
+            <div class="quizio-preview-controls">${this.renderControls()}</div>
+            ${this.renderChilds()}
+        `
     }
 
     template() {

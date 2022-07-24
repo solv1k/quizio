@@ -1,5 +1,6 @@
 import Container from "../components/Container.js";
 import ButtonComponent from "../components/global/ButtonComponent.js";
+import { DOM } from "../DOM.js";
 
 class PreviewContainer extends Container {
     constructor() {
@@ -23,13 +24,11 @@ class PreviewContainer extends Container {
     }
 
     show() {
-        this._visible = true
-        this.refresh()
+        DOM.getElementByComponentId(this.id).classList.add('show')
     }
 
     hide() {
-        this._visible = false
-        this.refresh()
+        DOM.getElementByComponentId(this.id).classList.remove('show')
     }
 
     renderControls() {

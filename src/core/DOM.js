@@ -23,8 +23,8 @@ class DOM {
      * @param {HTMLElement} el 
      * @returns {HTMLElement}
      */
-    static getRootChild(component, el) {
-        const componentTemplate = component.template().replace(/[\r\n]/gm, '').trim()
+    static getRootChild(el, template) {
+        const componentTemplate = template.replace(/[\r\n]/gm, '').trim()
         
         el.innerHTML = componentTemplate
         const componentDomChilds = el.childNodes
@@ -42,18 +42,25 @@ class DOM {
      * @param {RenderableComponent} component 
      * @returns {string} HTML-string
      */
-    static getHtmlWithAttributes(component) {
+    static getHtmlWithAttributes(component, preview = false) {
         const el = document.createElement("div")
-        const rootDomChild = DOM.getRootChild(component, el)
+        const template = preview ? component.previewTemplate() : component.template()
+        const rootDomChild = DOM.getRootChild(el, template)
 
         rootDomChild.setAttribute(DATA_COMPONENT_ID, component.id)
 
-        for (let [key, value] of Object.entries(component.attributes)) {
-            rootDomChild.setAttribute(key, value)
-        }
-
-        for (let [key, action] of Object.entries(component.events)) {
-            rootDomChild.setAttribute(key, DATA_ACTION_FUNC.replace("$", action.id))
+        if (preview) {
+            for (let [key, action] of Object.entries(component.previewEvents)) {
+                rootDomChild.setAttribute(key, DATA_ACTION_FUNC.replace("$", action.id))
+            }
+        } else {
+            for (let [key, value] of Object.entries(component.attributes)) {
+                rootDomChild.setAttribute(key, value)
+            }
+    
+            for (let [key, action] of Object.entries(component.events)) {
+                rootDomChild.setAttribute(key, DATA_ACTION_FUNC.replace("$", action.id))
+            }
         }
 
         return el.innerHTML

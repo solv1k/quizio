@@ -10,8 +10,29 @@ class RenderableComponent extends Component {
         super()
         this.attributes = {}
         this.events = {}
+        this.previewEvents = {}
         this.childs = []
         this.actions = []
+        this.previewer = null
+    }
+
+    /**
+     * Set previewer for rendering QUIZ preview.
+     * 
+     * @param {Previewer} previewer 
+     */
+    setPreviewer(previewer) {
+        if (typeof previewer === "object")
+            this.previewer = previewer
+    }
+
+    /**
+     * Get previewer for rendering QUIZ preview.
+     * 
+     * @returns {Previewer | null}
+     */
+    getPreviewer() {
+        return this.previewer
     }
 
     /**
@@ -97,6 +118,15 @@ class RenderableComponent extends Component {
      */
     renderChilds() {
         return this.childs.map((child) => child.render()).join("")
+    }
+
+    /**
+     * Returns HTML-string for all rendered previews of child components.
+     * 
+     * @returns {string} HTML-string
+     */
+    renderChildsPreviews() {
+        return this.childs.map((child) => child.renderPreview()).join("")
     }
 
     /**
@@ -202,7 +232,7 @@ class RenderableComponent extends Component {
     /**
      * Create new event for current component
      */
-     createEvent(type, actionFunction) {
+    createEvent(type, actionFunction) {
         if (typeof type === "undefined") return
         if (typeof actionFunction !== "function") return
 
@@ -211,6 +241,44 @@ class RenderableComponent extends Component {
         action.start = actionFunction
 
         this.setEvent(type, action)
+    }
+
+    /**
+     * Set component event action by key,
+     * 
+     * @param {string} key 
+     * @returns {Action | null}
+     */
+    setPreviewEvent(key, action) {
+        this.previewEvents[key] = action
+        return this
+    }
+
+    /**
+     * Returns component event action by key,
+     * 
+     * @param {string} key 
+     * @returns {Action | null}
+     */
+    getPreviewEvent(key) {
+        return this.previewEvents[key]
+    }
+
+    /**
+     * Create new event for current component.
+     * 
+     * @param {string} type
+     * @param {Function} func
+     */
+    createPreviewEvent(type, func) {
+        if (typeof type === "undefined") return
+        if (typeof func !== "function") return
+
+        const action = new Action()
+
+        action.start = func
+
+        this.setPreviewEvent(type, action)
     }
 
     /**
@@ -239,12 +307,28 @@ class RenderableComponent extends Component {
     }
 
     /**
+     * Returns preview template.
+     */
+    previewTemplate() {
+        return this.template()
+    }
+
+    /**
      * Returns HTML-string for current component taking from template() method.
      * 
      * @returns {string} HTML-string
      */
     render() {
         return DOM.getHtmlWithAttributes(this)
+    }
+
+    /**
+     * Returns HTML-string for current component taking from previewTemplate() method.
+     * 
+     * @returns {string} HTML-string
+     */
+    renderPreview() {
+        return DOM.getHtmlWithAttributes(this, true)
     }
 
     /**
@@ -292,6 +376,16 @@ class RenderableComponent extends Component {
     }
 
     /**
+     * Remove all component preview events.
+     */
+    removeAllPreviewEvents() {
+        for (let [key, action] of Object.entries(this.previewEvents)) {
+            action.remove()
+        }
+        this.previewEvents = {}
+    }
+
+    /**
      * Remove all component actions.
      */
     removeAllActions() {
@@ -312,6 +406,7 @@ class RenderableComponent extends Component {
     remove() {
         this.removeAllChilds()
         this.removeAllEvents()
+        this.removeAllPreviewEvents()
         this.removeAllActions()
         this.removeDomElement()
         super.remove()

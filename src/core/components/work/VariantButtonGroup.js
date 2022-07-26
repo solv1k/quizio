@@ -36,6 +36,14 @@ class VariantButtonGroup extends ScreenChildComponent {
             </div>
         `
     }
+
+    previewTemplate() {
+        return `
+            <div class="quizio-variant-button-group">
+                ${this.renderChildsPreviews()}
+            </div>
+        `
+    }
 }
 
 export default VariantButtonGroup

@@ -3,11 +3,12 @@ import ManageField from "./ManageField.js";
 import OptionField from "./OptionField.js";
 
 class SelectField extends ManageField {
-    constructor({ label = "", options = [] }) {
+    constructor({ label = "", options = [], onSelect = null }) {
         super({ label })
         this.options = [{ label }, ...options]
         this._options = []
         this._selectedOptionValue = ""
+        this.onSelect = onSelect
         this.init()
     }
 
@@ -20,6 +21,8 @@ class SelectField extends ManageField {
             this._options.forEach(
                 (option) => option.setSelected(option.value === this._selectedOptionValue)
             )
+            if (typeof this.onSelect === "function")
+                this.onSelect(this._selectedOptionValue)
         }
 
         this.setEvent("onchange", onChangeOption)

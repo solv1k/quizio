@@ -3,7 +3,13 @@ import ButtonField from "./ButtonField.js";
 import ManageField from "./ManageField.js";
 
 class TextField extends ManageField {
-    constructor({ label, value = "", target, autosaveOnChange = false }) {
+    constructor({ 
+        label = "",
+        value = "",
+        target = null,
+        autosaveOnChange = false,
+        onChange = null
+    } = {}) {
         super({
             label,
             type: "text"
@@ -11,6 +17,7 @@ class TextField extends ManageField {
         this.value = value
         this.target = target
         this.autosaveOnChange = autosaveOnChange
+        this.onChange = onChange
         this.bindSaveAction()
     }
 
@@ -24,6 +31,9 @@ class TextField extends ManageField {
             this.target.component
             .setAttribute(this.target.attribute, this.value)
             .refresh()
+
+            if (typeof this.onChange === "function")
+                this.onChange(this.value)
         }
 
         this.setEvent("onlick", saveAction);

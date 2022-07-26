@@ -6,10 +6,10 @@ class PreviewContainer extends Container {
         super({ storeId: "preview" })
         this._constrols = []
         this._visible = false
-        this.initControls()
+        this.initNavControls()
     }
 
-    initControls() {
+    initNavControls() {
         const closeBtn = new ButtonComponent({ text: "Close preview" })
         closeBtn.createEvent("onclick", () => {
             this.hide()
@@ -35,10 +35,14 @@ class PreviewContainer extends Container {
         return this._constrols.map((control) => control.render());
     }
 
+    renderPreviews() {
+        return this.childs.map((child) => child.renderPreview());
+    }
+
     innerTemplate() {
         return `
             <div class="quizio-preview-controls">${this.renderControls()}</div>
-            <div class="quizio-preview-screens">${this.renderChilds()}</div>
+            <div class="quizio-preview-screens">${this.renderPreviews()}</div>
         `
     }
 

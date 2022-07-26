@@ -55,6 +55,19 @@ class Screen extends RenderableComponent {
             </div>
         `
     }
+
+    /**
+     * Preview HTML-template for this component.
+     * 
+     * @returns {string} HTML-template
+     */
+     previewTemplate() {
+        return `
+            <div class="quizio-screen" data-quizio-id="${this.id}">
+                ${this.renderChildsPreviews()}
+            </div>
+        `
+    }
 }
 
 export default Screen

@@ -4,16 +4,8 @@ class Previewer {
     constructor(quizComponents = []) {
         this.quizComponents = quizComponents
         this._visible = false
-    }
-
-    show() {
-        this._visible = true
-        this.refresh()
-    }
-
-    hide() {
-        this._visible = false
-        this.refresh()
+        this._activeScreen = null
+        this.init()
     }
 
     getPreviewContainer() {
@@ -26,29 +18,62 @@ class Previewer {
         return previewContainer
     }
 
-    renderQuizToPreviewContainer() {
+    init() {
+        // get container for rendering quizio preview
+        const previewContainer = this.getPreviewContainer()
+        // set previewer to components
+        this.quizComponents.forEach((component) => {
+            component.setPreviewer(this)
+        })
+    }
+
+    show() {
+        this._visible = true
+        this.refresh()
+    }
+
+    hide() {
+        this._visible = false
+        this.refresh()
+    }
+
+    renderActiveScreenToPreviewContainer() {
         // get container for rendering quizio preview
         const previewContainer = this.getPreviewContainer()
         // clear old quiz components (not remove!)
         previewContainer.clearChilds()
-        // parse quiz data
-        this.quizComponents.forEach((component) => {
-            previewContainer.addChild(component)
-        })
-        // show preview contianer
-        previewContainer.show()
+        // get active screen
+        const activeScreen = this.getActiveScreen()
+        // add active screen to preview container
+        previewContainer.addChild(activeScreen)
+        // show preview container
+        previewContainer.show() 
     }
 
     hidePreviewContrainer() {
         // get container for rendering quizio preview
         const previewContainer = this.getPreviewContainer()
+        // clear active screen
+        this._activeScreen = null
         // hide preview container
         previewContainer.hide()
     }
 
+    getActiveScreen() {
+        if (this._activeScreen)
+            return this._activeScreen
+        else
+            return this.quizComponents[0]
+    }
+
+    setActiveScreen(screen) {
+        this._activeScreen = screen
+        this.refresh()
+    }
+
     refresh() {
         if (this._visible)
-            this.renderQuizToPreviewContainer()
+            this.renderActiveScreenToPreviewContainer()
         else
             this.hidePreviewContrainer()
     }
